@@ -67,10 +67,9 @@ class Phase:
             self.update_phase_field(wizard, choice, ["City","Street","Number"])
         if self.num_phase==3:
             self.update_phase_field(wizard, choice, ["Social Media","Hobbies"])
-
         if self.num_phase==4:
             self.update_phase_field(wizard, choice, ["Happy","Skydiving","One Dollar"])
-
+      
 
     def update_phase_field(self,wizard, choice,phase_attributes):
         '''Update a field in the wizard's details if it belongs to the specified phase.

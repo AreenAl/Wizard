@@ -28,8 +28,7 @@ class Wizard:
             display.show_phase(phase.num_phase, self.details)
         elif if_update.upper() == 'N':
             print("You chose not to update anything.")
-        # else:
-            # print("Invalid input. Please enter 'Y' for Yes or 'N' for No.")
+
 
 
     def create_phase(self,num_phase):
@@ -51,10 +50,9 @@ class Wizard:
                 if num_phase == 2:
                     num_phase += 1
                     self.create_phase(num_phase)
+                if num_phase == 3:
+                    self.create_phase(num_phase + 1)
                     return 'done'
-                #if num_phase == 3:
-                #    self.create_phase(num_phase + 1)
-                #    return 'done'
             elif move == "2":
                 if num_phase == 1:
                     print('You in Phase 1, You cant prev')
@@ -87,13 +85,18 @@ class Wizard:
                 if_done = self.prev_or_next(1)
                 if if_done == 'done':
                     display.display_summary(self.details)
+                    if display.get_rest()==True:
+                        self.phases = []
+
+
             elif choice == "2":
-                phase = int(input("Enter phase number: "))
-                if phase.num_phase in map (lambda item :item.num_phase ,self.phases):
-                    self.show_phase(phase.num_phase)
+                phase_number = int(input("Enter phase number: "))
+                phase_numbers = [phase.num_phase for phase in self.phases]
+                if phase_number in phase_numbers:
+                    self.show_phase(phase_number ,  self.details)
+                elif phase_number == len(self.phases) + 1:
+                    self.create_phase(phase_number)
                 else:
-                    if phase.num_phase == self.phases[len(self.phases)-1]+1:
-                        self.run_phase(phase)
                     print("You can't access this phase yet. Please complete previous phases.")
             else:
                 print("Invalid choice!")

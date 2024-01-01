@@ -7,10 +7,10 @@ Project WIZARD is a console-based application designed to streamline the registr
 Splash Screen: A welcoming page with a Start button initiates the wizard phases.
 
 ### Phases:
-#### Phase 1: Enter full name, email, and birth date.
-#### Phase 2: Provide city, address, and contact number.
-#### Phase 3: Share social media details and hobbies. The system allows users to navigate between previous and next phases.
-#### Phase 4: Complete the health phase by answering yes/no questions.
+- Phase 1: Enter full name, email, and birth date.
+- Phase 2: Provide city, address, and contact number.
+- Phase 3: Share social media details and hobbies. The system allows users to navigate between previous and next phases.
+- Phase 4: Complete the health phase by answering yes/no questions.
 
 ## Navigation:
 A menu at the start with options to "Start New" or "Continue."
@@ -22,10 +22,10 @@ If 'Continue,' prompt the user for the phase level number and navigate according
 A 'Reset' button that clears all entered details and redirects the user to the beginning.
 
 ## Rules:
-You cannot proceed to a phase without completing the previous one.
-You can go back to a previous phase.
-You cannot change a field that does not exist in the current phase.
-If you want to continue from a specific phase but the previous phases haven't been completed, land on the last completed phase.
+- You cannot proceed to a phase without completing the previous one.
+- You can go back to a previous phase.
+- You cannot change a field that does not exist in the current phase.
+- If you want to continue from a specific phase but the previous phases haven't been completed, land on the last completed phase.
 
 ## Styling:
 Using coloring and other visually appealing elements to enhance the terminal interface.
