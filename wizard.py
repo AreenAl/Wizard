@@ -14,7 +14,7 @@ class Wizard:
             "Hobbies": None,
             "Happy": None,  
             "Skydiving": None, 
-            "One Dolar": None
+            "One Dollar": None
 
         }
         self.phases = []
