@@ -1,4 +1,5 @@
 import re
+from colorama import Fore
 class Phase:
     def __init__(self,number):
         self.num_phase=number
@@ -27,7 +28,7 @@ class Phase:
                 if func(user_input):
                     return user_input
                 else:
-                    print("Invalid input. Please enter it again.")
+                    print(f"{Fore.RED}Invalid input. Please enter it again.!{Fore.WHITE}")
             else:
                 user_input=input()
                 return user_input

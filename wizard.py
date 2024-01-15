@@ -19,18 +19,20 @@ class Wizard:
             "One Dollar": None
         }
         self.phases = []
-        self.wizards=[]
-
-    def show_wizards_history(self):
-        if not self.wizards:
+        self.users=[]
+    
+    
+    def add(self,num1,num2):
+        return num1+num2
+    
+    def show_history(self):
+        if not self.users:
             print("No wizards completed yet.")
-            return
-
-        headers = list(self.wizards[0].keys())
-        wizards_data = [list(wizard.values()) for wizard in self.wizards]
-
+            return 
+        headers = list(self.users[0].keys())
+        wizards_data = [list(user.values()) for user in self.users]
         print(tabulate(wizards_data, headers=headers))
-
+        
         while True:
             sort_choice = input("\n\n\nSort by column: (1) Name (2) Email (3) Birth Date (4) City (5) Street "
                                 "(6) Number (7) Social Media (8) Hobbies (9) Happy (10) Skydiving (11) One Dollar (0) Cancel: ")
@@ -38,13 +40,10 @@ class Wizard:
                 break
             elif sort_choice.isdigit() and 1 <= int(sort_choice) <= len(headers):
                 column_index = int(sort_choice) - 1
-                sorted_wizards = sorted(self.wizards, key=itemgetter(headers[column_index]))
+                sorted_wizards = sorted(self.users, key=itemgetter(headers[column_index]))
                 print(tabulate([list(wizard.values()) for wizard in sorted_wizards], headers=headers))
             else:
                 print("Invalid choice. Please enter a number between 1 and 11 or '0' to cancel.")
-
-
-
 
     def check_if_update(self, phase):
         if_update = input("Do you want to update something? Type 'Y' for Yes or 'N' for No: ")
@@ -62,6 +61,9 @@ class Wizard:
         display.show_phase(phase.num_phase, self.details)
         self.phases.append(phase)
         self.check_if_update(phase)
+        if num_phase==4:
+            self.users.append(self.details)
+            db.add_to_data(self.details) 
 
     def prev_or_next(self, num_phase):
         while True:
@@ -99,6 +101,29 @@ class Wizard:
             else:
                 print("Invalid choice. Please enter '1' to continue Next or '2' to Prev.")
 
+    def show_history(self):
+        if not self.users:
+            print("No wizards completed yet.")
+            return
+        headers = list(self.users[0].keys())
+        wizards_data = [list(user.values()) for user in self.users]
+
+        print(tabulate(wizards_data, headers=headers))
+
+        while True:
+            sort_choice = input("\n\n\nSort by column: (1) Name (2) Email (3) Birth Date (4) City (5) Street "
+                                "(6) Number (7) Social Media (8) Hobbies (9) Happy (10) Skydiving (11) One Dollar (0) Cancel: ")
+            if sort_choice == "0":
+                break
+            elif sort_choice.isdigit() and 1 <= int(sort_choice) <= len(headers):
+                column_index = int(sort_choice) - 1
+                sorted_wizards = sorted(self.users, key=itemgetter(headers[column_index]))
+                print(tabulate([list(wizard.values()) for wizard in sorted_wizards], headers=headers))
+            else:
+                print("Invalid choice. Please enter a number between 1 and 11 or '0' to cancel.")
+        for user in self.users:
+            print('1')
+
     def start_wizard(self):
         print("Welcome to the Wizard!")
         while True:
@@ -108,9 +133,9 @@ class Wizard:
                 if_done = self.prev_or_next(1)
                 if if_done == 'done':
                     display.display_summary(self.details)
-                    self.phases = []
-                    self.wizards.append(self.details)
-                    self.details={}
+                    if display.get_rest()==True:
+                        self.phases = []
+                        self.wizards.append(self.details)
             elif choice == "2":
                 phase_number = int(input("Enter phase number: "))
                 phase_numbers = [phase.num_phase for phase in self.phases]
@@ -119,8 +144,9 @@ class Wizard:
                 elif phase_number == len(self.phases) + 1:
                     self.create_phase(phase_number)
                 else:
-                    print("You can't access this phase yet. Please complete previous phases.")
-            elif choice == "3":
-                self.show_wizards_history()
+                    print("You can't access this phase yet. Please complete previous phases.")            
+            elif choice=="3":
+                self.show_history()  
             else:
                 print("Invalid choice!")
+            
